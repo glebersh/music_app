@@ -16,10 +16,11 @@ const SearchResultsPage = () => {
       case 'multi': {
         return (
           <>
+            <ArtistsList />
             <TopResultCard />
             <SongsList />
             <SongCollectionsList type='albums' />
-            <ArtistsList />
+
             <SongCollectionsList type='playlists' />
           </>
         )

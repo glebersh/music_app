@@ -13,6 +13,7 @@ export const getDataFromSearch = createAsyncThunk(
   'artist/setArtistAsync',
   async function ({ urlFormattedCategory, urlFormattedText }, { dispatch }) {
     try {
+      dispatch(onLoading())
       const response = await fetch(`https://spotify23.p.rapidapi.com/search/?q=${urlFormattedText}&type=${urlFormattedCategory}&offset=0&limit=10&numberOfTopResults=5`,
         fetchOptions)
       if (!response.ok) {
@@ -33,7 +34,7 @@ const searchSlice = createSlice({
     searchResult: {},
     isEmpty: true,
     searchCategory: 'multi',
-    isLoading: true
+    isLoading: true,
   },
   reducers: {
     onSearch(state, action) {
@@ -41,11 +42,14 @@ const searchSlice = createSlice({
       state.isEmpty = false;
       state.isLoading = false;
     },
+    onLoading(state) {
+      state.isLoading = true;
+    },
     onCategoryChange(state, action) {
       state.searchCategory = action.payload;
     }
   }
 });
 
-export const { onSearch, onCategoryChange } = searchSlice.actions;
+export const { onSearch, onCategoryChange, onLoading } = searchSlice.actions;
 export default searchSlice.reducer;

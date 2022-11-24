@@ -6,10 +6,10 @@ const ArtistsList = () => {
   const content = useSelector(state => state.searchReducer.searchResult.artists.items);
 
   const artistsData = content.map((item) =>
-  (<ArtistCard key={item.data.uri}
+  (<ArtistCard
+    key={item.data.uri}
     artistID={(item.data.uri).replace('spotify:artist:', '')}
-    name={item.data.profile.name}
-    imgURL={item.data.visuals.avatarImage.sources[1].url}
+    name={item.data.profile.name} imgURL={item.data.visuals.avatarImage !== null ? item.data.visuals.avatarImage.sources[1].url : ''}
   />)
   )
 

@@ -3,20 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getArtistData } from '../../../store/slices/artistInfoSlice';
 
-// const ArtistInfo = (item) => {
-//   return (
-//     <>
-//       <img src={item.images[0].url} />
-//       <p>{item.name}</p>
-//       <p>{item.popularity}</p>
-//       <ul>
-//         <li>{item.genres[0]}</li>
-//       </ul>
-//       <p>{item.followers.total}</p>
-//     </>
-//   )
-// };
-
 
 const ArtistPage = () => {
   let { artistID } = useParams();
