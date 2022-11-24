@@ -6,8 +6,10 @@ const TopResultCard = () => {
   const { data } = useSelector(state => state.searchReducer.searchResult.topResults.items[0]);
   return (
     <ArtistCard uri={data.uri}
+      type='topResult'
       name={data.profile.name}
-      imgURL={data.visuals.avatarImage.sources[0].url} />
+      imgURL={data.visuals.avatarImage.sources[0].url}
+      artistID={(data.uri).replace('spotify:artist:', '')} />
   )
 };
 

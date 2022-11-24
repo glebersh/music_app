@@ -1,3 +1,4 @@
+import { Box, Image, Text, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -6,13 +7,16 @@ import { Link } from 'react-router-dom';
 const SongCollectionCard = (props) => {
   const { name, coverURL, id, artist, type, owner, artistID } = props;
   const link = `artists/${artistID}`;
+
   return (
-    <div>
-      <img src={coverURL} />
-      <p>{name}</p>
-      <Link to={link}>{artist}</Link>
-      {type === 'playlists' ? <p>{owner}</p> : null}
-    </div>
+    <Flex m='1em 0 0 0' direction='column' align='center' justify='flex-start'
+      maxW='300px'>
+      <Image src={coverURL} maxW='300px' maxH='300px' />
+      <Text w='80%' textAlign='center'>{name}</Text>
+      <Link to={link}><Text
+        _hover={{ color: 'primary' }}>{artist}</Text></Link>
+      {type === 'playlists' ? <Text>{owner}</Text> : null}
+    </Flex>
   )
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Flex, Text } from '@chakra-ui/react';
 
 import Header from '../../Header';
 import SongCollectionsList from '../../SongCollectionsList/SongCollectionsList';
@@ -16,12 +17,25 @@ const SearchResultsPage = () => {
       case 'multi': {
         return (
           <>
-            <ArtistsList />
-            <TopResultCard />
-            <SongsList />
-            <SongCollectionsList type='albums' />
-
-            <SongCollectionsList type='playlists' />
+            <Text w='100%' fontSize='2.5em' m='3em 0 1.5em' paddingInlineStart='5em'>TOP RESULTS</Text>
+            <Flex direction='row' justify='space-between' w='90%' flexWrap='wrap'>
+              <TopResultCard />
+              <Flex flex='1' ml='3em' flexWrap='wrap'>
+                <SongsList />
+              </Flex>
+            </Flex>
+            <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>ALBUMS</Text>
+            <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
+              <SongCollectionsList type='albums' />
+            </Flex>
+            <Text fontSize='2.5em' w='100%' m='3em 0 1em' paddingInlineStart='5em'>ARTISTS</Text>
+            <Flex direction='row' justify='space-evenly' w='70%' flexWrap='wrap'>
+              <ArtistsList />
+            </Flex>
+            <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
+            <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
+              <SongCollectionsList type='playlists' />
+            </Flex>
           </>
         )
       }
