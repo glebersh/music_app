@@ -7,12 +7,12 @@ const ArtistsList = () => {
 
   const artistsData = content.map((item) =>
   (<ArtistCard
-    key={item.data.uri}
-    type='artists'
-    artistID={(item.data.uri).replace('spotify:artist:', '')}
-    name={item.data.profile.name}
-    imgURL={item.data.visuals.avatarImage !== null ? item.data.visuals.avatarImage.sources[0].url : ''}
-    width={item.data.visuals.avatarImage !== null ? item.data.visuals.avatarImage.sources[1].width : ''}
+    key={item.id}
+    artistID={item.id}
+    name={item.name}
+    imgURL={item.images[1] ? item.images[1].url : null}
+    width={item.images[1] ? item.images[1].width : null}
+    genre={item.genres ? item.genres[0] : null}
   />)
   )
 

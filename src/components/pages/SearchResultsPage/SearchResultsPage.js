@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Grid, Text } from '@chakra-ui/react';
 
-import Header from '../../Header';
 import SongCollectionsList from '../../SongCollectionsList/SongCollectionsList';
 import SongsList from '../../SongsList/SongsList';
 import ArtistsList from '../../ArtistsList/ArtistsList';
-import TopResultCard from '../../TopResultCard/TopResultCard';
 
 const SearchResultsPage = () => {
   const isEmpty = useSelector(state => state.searchReducer.isEmpty);
@@ -14,57 +12,40 @@ const SearchResultsPage = () => {
 
   const pageContent = () => {
     switch (currentSearchCategory) {
-      case 'multi': {
+      case 'songs': {
+        return (<Grid gridTemplateColumns='1fr 1fr 1fr 1fr 1fr' gridTemplateRows='1fr 1fr 1fr' w='90%' m='0 auto 0 10em'><SongsList /></Grid>)
+      }
+      case 'albums': {
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList type='albums' /></Flex>)
+      }
+      case 'playlists': {
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'> <SongCollectionsList type='playlists' /></Flex >)
+      }
+      case 'artists': {
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><ArtistsList /></Flex >)
+      }
+      default: {
         return (
           <>
-            <Text w='100%' fontSize='2.5em' m='3em 0 1.5em' paddingInlineStart='5em'>TOP RESULTS</Text>
-            <Flex direction='row' justify='space-between' w='90%' flexWrap='wrap'>
-              <TopResultCard />
-              <Flex flex='1' ml='3em' flexWrap='wrap'>
-                <SongsList />
-              </Flex>
-            </Flex>
+            <Text w='100%' fontSize='2.5em' m='3em 0 1.5em' paddingInlineStart='5em'>SONGS</Text>
+            <Grid gridTemplateColumns='1fr 1fr 1fr' w='80%'>
+              <SongsList />
+            </Grid>
+
             <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>ALBUMS</Text>
             <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
-              <SongCollectionsList type='albums' />
+              <SongCollectionsList type='ALBUMS' />
             </Flex>
+
             <Text fontSize='2.5em' w='100%' m='3em 0 1em' paddingInlineStart='5em'>ARTISTS</Text>
             <Flex direction='row' justify='space-evenly' w='70%' flexWrap='wrap'>
               <ArtistsList />
             </Flex>
+
             <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
             <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
-              <SongCollectionsList type='playlists' />
+              <SongCollectionsList type='PLAYLISTS' />
             </Flex>
-          </>
-        )
-      }
-      case 'songs': {
-        return (
-          <>
-            <SongsList />
-          </>
-        )
-      }
-      case 'albums': {
-        return (
-          <>
-            <SongCollectionsList type='albums' />
-          </>
-        )
-      }
-
-      case 'playlists': {
-        return (
-          <>
-            <SongCollectionsList type='playlists' />
-          </>
-        )
-      }
-      case 'artists': {
-        return (
-          <>
-            <ArtistsList />
           </>
         )
       }
@@ -74,7 +55,6 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      <Header />
       {
         isEmpty ? null :
           <>

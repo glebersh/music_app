@@ -5,6 +5,7 @@ import './Search.css';
 import { getDataFromSearch, onCategoryChange } from '../../store/slices/searchSlice';
 
 import { Box, Flex, Input, Tag } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -15,13 +16,14 @@ const Search = () => {
     dispatch(onCategoryChange(searchCategory));
   }, [searchCategory]);
 
+  const navigate = useNavigate();
 
   const sendSearchRequest = (e, text, category) => {
     e.preventDefault();
     const urlFormattedText = text.replace(' ', '%20');
-    const urlFormattedCategory = category.toLowerCase();
-    dispatch(getDataFromSearch({ urlFormattedCategory, urlFormattedText }));
+    dispatch(getDataFromSearch(urlFormattedText));
     dispatch(onCategoryChange(category));
+    navigate('/');
   };
 
   return (

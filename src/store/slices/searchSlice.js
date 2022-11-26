@@ -1,30 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const fetchOptions = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': '56ab86c4admsh2ce0507f444bfd2p1b8c1ajsnfcd367fa3383',
-    'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-  }
-};
-
 export const getDataFromSearch = createAsyncThunk(
-  'artist/setArtistAsync',
-  async function ({ urlFormattedCategory, urlFormattedText }, { dispatch }) {
-    try {
-      dispatch(onLoading())
-      const response = await fetch(`https://spotify23.p.rapidapi.com/search/?q=${urlFormattedText}&type=${urlFormattedCategory}&offset=0&limit=10&numberOfTopResults=5`,
-        fetchOptions)
-      if (!response.ok) {
-        throw new Error('Item was not deleted due to an occurred error');
-      }
-      const data = await response.json();
-      dispatch(onSearch(data));
-    } catch (error) {
-      console.log(error.message);
-      return;
-    }
+  'artist/getDataFromSearch',
+
+  async function (urlFormattedText, { dispatch, getState }) {
+    const state = getState();
+    await fetch(`https://api.spotify.com/v1/search?q=${urlFormattedText}&type=artist,track,album,playlist&market=US&limit=15`,
+      {
+        headers: {
+          Authorization: `Bearer ${state.authReducer}`,
+        }
+      })
+      .then(response => response.json())
+      .then(response => dispatch(onSearch(response)))
+      .catch(error => console.log(error.message));
   });
 
 

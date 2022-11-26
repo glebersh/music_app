@@ -11,12 +11,12 @@ const SongCollectionCard = (props) => {
   return (
     <Flex m='1em 0 0 0' direction='column' align='center' justify='flex-start'
       maxW='300px'>
-      <Image src={coverURL} maxW='300px' maxH='300px' />
+      <Image src={coverURL} maxW='300px' maxH='300px' fallbackSrc='https://via.placeholder.com/300' />
       <Text w='80%' textAlign='center'>{name}</Text>
       <Link to={link}><Text
         _hover={{ color: 'primary' }}>{artist}</Text></Link>
       {type === 'playlists' ? <Text>{owner}</Text> : null}
-    </Flex>
+    </Flex >
   )
 };
 

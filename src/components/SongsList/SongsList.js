@@ -2,15 +2,27 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SongCard from '../SongCard/SongCard';
 
-const SongsList = () => {
-  const content = useSelector(state => state.searchReducer.searchResult.tracks.items);
+const SongsList = ({ type }) => {
+
+  const content = useSelector(state => {
+    if (type === 'ARTIST_TOP_TRACKS') {
+      return state.artistInfoReducer.artistTopTracks.tracks;
+    }
+    return state.searchReducer.searchResult.tracks.items;
+  });
+
 
   const trackData = content.map((item) =>
-  (<SongCard key={item.data.id} name={item.data.name}
-    coverURL={item.data.albumOfTrack.coverArt.sources[1].url}
-    id={item.data.id} albumOfTrack={item.data.albumOfTrack.name}
-    artist={item.data.artists.items[0].profile.name}
-    artistID={(item.data.artists.items[0].uri).replace('spotify:artist:', '')} />)
+  (<SongCard key={item.id}
+    duration={item.duration_ms}
+    name={item.name}
+    coverURL={item.album.images ? item.album.images[2].url : null}
+    id={item.id}
+    albumOfTrack={item.album.name}
+    artist={item.artists[0].name}
+    artistID={item.artists[0].id}
+    explicit={item.explicit}
+    playURL={item.preview_url} />)
   )
 
   return (
