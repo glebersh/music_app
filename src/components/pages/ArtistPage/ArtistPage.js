@@ -13,8 +13,6 @@ const ArtistPage = () => {
 
   useEffect(() => {
     dispatch(getArtistGeneral(artistID));
-    dispatch(getArtistTopTracks(artistID));
-    dispatch(getArtistTopAlbums(artistID));
   }, []);
 
 
@@ -23,12 +21,12 @@ const ArtistPage = () => {
 
   return (
     <>
+      <Link to='/'>BACK TO SEARCH</Link>
       {loading ? <Spinner w='200px' h='200px' /> :
         (
           <>
             <Flex>
               <Image src={data.images ? data.images[0].url : null} />
-
               <Box>
                 <Text>{data.name}</Text>
                 <Tag>Artist</Tag>
@@ -46,7 +44,7 @@ const ArtistPage = () => {
             </Box>
           </>
         )}
-      <Link to='/'>BACK TO SEARCH</Link>
+
     </>
   )
 };

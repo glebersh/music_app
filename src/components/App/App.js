@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React, { useEffect } from 'react';
 import './App.css';
 
-import SearchResultsPage from '../pages/SearchResultsPage/SearchResultsPage';
+import SearchResultsPage from '../pages/SearchResultsPage';
 import { Routes, Route } from 'react-router-dom';
-import ArtistPage from '../pages/ArtistPage/ArtistPage';
-import Layout from '../pages/Layout/Layout';
+import ArtistPage from '../pages/ArtistPage';
+import Layout from '../pages/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthToken } from '../../store/slices/authSlice';
-import { Box } from '@chakra-ui/react';
-import LoginPage from '../pages/LoginPage/LoginPage';
+import LoginPage from '../pages/LoginPage';
 
 const CLIENT_ID = "ea5fd0d4cfe147699b87b05db7e6f7bb"
 const CLIENT_SECRET = "3d64fc393dcb413891e91ac4dda2fd47"

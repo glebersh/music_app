@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Flex, Grid, Text } from '@chakra-ui/react';
+import { Flex, Grid, Text, Spinner } from '@chakra-ui/react';
 
 import SongCollectionsList from '../../SongCollectionsList/SongCollectionsList';
 import SongsList from '../../SongsList/SongsList';
@@ -8,6 +8,7 @@ import ArtistsList from '../../ArtistsList/ArtistsList';
 
 const SearchResultsPage = () => {
   const isEmpty = useSelector(state => state.searchReducer.isEmpty);
+  const isLoading = useSelector(state => state.searchReducer.isLoading);
   const currentSearchCategory = useSelector(state => state.searchReducer.searchCategory);
 
   const pageContent = () => {
@@ -56,7 +57,7 @@ const SearchResultsPage = () => {
   return (
     <>
       {
-        isEmpty ? null :
+        isEmpty && isLoading ? <Spinner w='200px' h='200px' /> :
           <>
             {pageContent()}
           </>

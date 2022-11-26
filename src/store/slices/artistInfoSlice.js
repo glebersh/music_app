@@ -13,38 +13,24 @@ export const getArtistGeneral = createAsyncThunk(
       })
       .then(response => response.json())
       .then(response => dispatch(setArtist(response)))
-      .catch(error => console.log(error.message));
-  });
-
-export const getArtistTopTracks = createAsyncThunk(
-  'artist/getArtistTopTracks',
-  async function (artistID, { dispatch, getState }) {
-    const state = getState();
-    await fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?market=US`,
-      {
-        headers: {
-          Authorization: `Bearer ${state.authReducer}`,
-        }
-      })
+      .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?market=US`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.authReducer}`,
+          }
+        }))
       .then(response => response.json())
       .then(response => dispatch(setArtistTopTracks(response)))
-      .catch(error => console.log(error.message));
-  });
-
-
-export const getArtistTopAlbums = createAsyncThunk(
-  'artist/getArtistTopAlbums',
-  async function (artistID, { dispatch, getState }) {
-    const state = getState();
-    await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?market=US&limit=10`,
-      {
-        headers: {
-          Authorization: `Bearer ${state.authReducer}`,
-        }
-      })
+      .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?market=US&limit=10`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.authReducer}`,
+          }
+        }))
       .then(response => response.json())
       .then(response => dispatch(setArtistTopAlbums(response)))
-      .catch(error => console.log(error.message));
+      .then(() => dispatch(setLoading()))
+      .catch(error => console.log(error.message))
   });
 
 
@@ -65,6 +51,8 @@ const artistInfoSlice = createSlice({
     },
     setArtistTopAlbums(state, action) {
       state.artistTopAlbums = action.payload;
+    },
+    setLoading(state) {
       state.isLoading = false;
     }
   }
