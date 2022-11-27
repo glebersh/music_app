@@ -56,12 +56,7 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      {
-        isEmpty && isLoading ? <Spinner w='200px' h='200px' /> :
-          <>
-            {pageContent()}
-          </>
-      }
+      {isEmpty ? null : isLoading ? <Spinner w='200px' h='200px' /> : <>{pageContent()}</>}
     </>
   )
 };

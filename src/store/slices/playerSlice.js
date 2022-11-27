@@ -1,47 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const fetchOptions = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': '56ab86c4admsh2ce0507f444bfd2p1b8c1ajsnfcd367fa3383',
-    'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-  }
-};
-
-export const setPlaybleURls = createAsyncThunk(
-  'playerData/setPlaybleURls',
-  async function (ids, { dispatch }) {
-    try {
-      const idFormatted = ids.toString();
-      const response = await fetch(`https://spotify23.p.rapidapi.com/tracks/?ids=${idFormatted}`,
-        fetchOptions)
-      if (!response.ok) {
-        throw new Error('Item was not deleted due to an occurred error');
-      }
-      const data = await response.json();
-      dispatch(setPlaybleUrls(data.tracks.map(item => item.preview_url)));
-    } catch (error) {
-      console.log(error.message);
-      return;
-    }
-  });
-
 const playerSlice = createSlice({
   name: 'playerData',
   initialState: {
     songs: null,
-    playbleURLs: null,
+    currentSong: '',
+    currentSongID: '',
+    currentSongGeneral: {},
+    isPlaying: false,
+    previousSong: '',
+    previousSongID: '',
+    nextSong: {},
+
   },
   reducers: {
     setSongs(state, action) {
       state.songs = action.payload;
     },
-    setPlaybleUrls(state, action) {
-      state.playbleURLs = action.payload;
-    }
+    setCurrentSong(state, action) {
+      state.currentSong = action.payload;
+    },
+    setCurrentSongID(state, action) {
+      state.currentSongID = action.payload;
+    },
+    setCurrentSongGeneral(state, action) {
+      state.currentSongGeneral = action.payload;
+    },
+    setIsPlaying(state) {
+      state.isPlaying = !state.isPlaying;
+    },
+    setPreviousSong(state, action) {
+      state.previousSong = action.payload.currentSongURL;
+      state.previousSongID = action.payload.currentSongID;
+    },
+    setNextSong(state, action) {
+      state.nextSong = action.payload;
+    },
   }
 });
 
-export const { setSongs, setPlaybleUrls } = playerSlice.actions;
+export const { setSongs, setCurrentSong,
+  setIsPlaying, setCurrentSongID,
+  setPreviousSong, setCurrentSongGeneral,
+  setNextSong } = playerSlice.actions;
 export default playerSlice.reducer;

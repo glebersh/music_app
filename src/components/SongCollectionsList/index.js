@@ -1,2 +1,2 @@
-import SongsCollectionList from './SongsCollectionList';
+import SongsCollectionList from './SongCollectionsList';
 export default SongsCollectionList;
