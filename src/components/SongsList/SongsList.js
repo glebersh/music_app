@@ -16,7 +16,7 @@ const SongsList = ({ type }) => {
     let nextItem = array[index + 1];
 
     return (<SongCard key={item.id}
-      {...item}
+      {...item} arrayPosition={index}
     />)
   })
 

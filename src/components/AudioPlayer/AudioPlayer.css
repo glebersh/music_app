@@ -7,3 +7,7 @@
   font-size: 2em;
   color: white;
 }
+
+audio::-webkit-media-controls-play-button {
+  display: none;
+}

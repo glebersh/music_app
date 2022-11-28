@@ -6,16 +6,16 @@ export const getSongCollectionTracks = createAsyncThunk(
   'playerData/getSongCollectionTracks',
   async function ({ id, playlistType }, { dispatch, getState }) {
     const state = getState();
-    await fetch(`https://api.spotify.com/v1/${playlistType}/${id}?market=US`,
+    const repsonse = await fetch(`https://api.spotify.com/v1/${playlistType}/${id}?market=US`,
       {
         headers: {
           Authorization: `Bearer ${state.authReducer}`,
         }
       })
-      .then(result => result.json())
-      .then(result => dispatch(setSongsCollection(result)))
-      .then(() => dispatch(setSongsCollectionType(playlistType)))
-      .catch(error => console.log(error.message));
+    const data = await repsonse.json();
+    dispatch(setSongsCollectionType(playlistType))
+    dispatch(setSongsCollection(data))
+    // .catch(error => console.log(error.message));
   });
 
 

@@ -8,7 +8,7 @@ import { setCurrentSong, setIsPlaying, setNextSong, setPreviousSong, setSongsCol
 
 const SongCard = (props) => {
 
-  // const link = `artists/${props.album.artist.id}`;
+  const link = `artists/${props.album.artists[0].id}`;
 
   const isPlaying = useSelector(state => state.playerReducer.isPlaying);
   const currentSong = useSelector(state => state.playerReducer.currentSong);
@@ -28,10 +28,12 @@ const SongCard = (props) => {
 
   const onPlayHandler = (e, playbleLink) => {
     if (playbleLink !== currentSong.preview_url && isPlaying) {
+      dispatch(setPreviousSong(currentSong));
       dispatch(setCurrentSong(props));
       dispatch(setSongsCollectionType('songs'));
     }
     else if (playbleLink !== currentSong.preview_url && !isPlaying) {
+      dispatch(setPreviousSong(currentSong));
       dispatch(setCurrentSong(props));
       dispatch(setSongsCollectionType('songs'));
       dispatch(setIsPlaying());
@@ -54,11 +56,10 @@ const SongCard = (props) => {
               <span>{props.explicit ? <i className="bi bi-explicit"></i> : null}</span>
             </Box>
             <Text minW='100%'>{props.album.name}</Text>
-            <Link to={''}>
-              <Text _hover={{
-                cursor: 'pointer',
-                color: 'primary'
-              }}>{props.artists.name}</Text></Link>
+            <Link to={link}><Text _hover={{
+              cursor: 'pointer',
+              color: 'primary'
+            }}>{props.artists[0].name}</Text></Link>
           </Flex>
         </Flex >
 
