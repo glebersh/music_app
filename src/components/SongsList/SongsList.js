@@ -12,20 +12,11 @@ const SongsList = ({ type }) => {
   });
 
 
-  const trackData = content.map((item, index) => {
-    let nextItem = content[index + 1];
+  const trackData = content.map((item, index, array) => {
+    let nextItem = array[index + 1];
 
     return (<SongCard key={item.id}
-      duration={item.duration_ms}
-      name={item.name}
-      coverURL={item.album.images ? item.album.images[2].url : null}
-      id={item.id}
-      albumOfTrack={item.album.name}
-      artist={item.artists[0].name}
-      artistID={item.artists[0].id}
-      explicit={item.explicit}
-      playURL={item.preview_url}
-      nextSong={nextItem}
+      {...item}
     />)
   })
 

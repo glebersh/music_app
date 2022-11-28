@@ -1,24 +1,26 @@
 import { Flex, Box, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentSong, setCurrentSongID, setIsPlaying, setNextSong } from '../../store/slices/playerSlice';
+import { setCurrentSong, setIsPlaying, setNextSong, setPreviousSong } from '../../store/slices/playerSlice';
 import './AudioPlayer.css';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
 
   const isPlaying = useSelector(state => state.playerReducer.isPlaying);
-  const currentSongURL = useSelector(state => state.playerReducer.currentSong);
-  const currentSongGeneral = useSelector(state => state.playerReducer.currentSongGeneral);
+  const currentSong = useSelector(state => state.playerReducer.currentSong);
   const previousSong = useSelector(state => state.playerReducer.previousSong);
-  const previousSongID = useSelector(state => state.playerReducer.previousSongID);
   const nextSong = useSelector(state => state.playerReducer.nextSong);
-  const searchResult = useSelector(state => state.searchReducer.searchResult);
-
+  const isEmpty = useSelector(state => state.searchReducer.isEmpty);
+  const isLoading = useSelector(state => state.searchReducer.isLoading);
+  const playlist = useSelector(state => state.playerReducer.songsCollection);
+  const collectionType = useSelector(state => state.playerReducer.songsCollectionType);
 
   const audioPlayer = document.querySelector('#audio');
-  const link = `artists/${currentSongGeneral.artistID}`;
+  // const link = isEmpty && currentSong ? '' : `artists/${currentSong.artists[0].id}`;
+  const link = '';
 
   useEffect(() => {
     if (document.readyState === 'complete') {
@@ -29,7 +31,7 @@ const AudioPlayer = () => {
         audioPlayer.pause();
       }
     }
-  }, [isPlaying, currentSongURL]);
+  }, [isPlaying, currentSong]);
 
 
   const onPlay = () => {
@@ -37,46 +39,62 @@ const AudioPlayer = () => {
   };
 
   const playPreviousSong = () => {
-    if (previousSong !== '' && previousSong !== currentSongURL) {
+    if (previousSong.preview_url !== '' && previousSong.preview_url !== currentSong.preview_url) {
       dispatch(setCurrentSong(previousSong));
-      dispatch(setCurrentSongID(previousSongID));
     }
   };
 
-  const playNextSong = () => {
-    dispatch(setCurrentSong(nextSong.preview_url));
-    dispatch(setCurrentSongID(nextSong.id));
-    dispatch(setNextSong(currentSongGeneral.nextSong));
-  };
+
+  const coverImage = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ?
+    currentSong.album.images[0].url :
+    collectionType === 'albums' ?
+      playlist.images[0].url : currentSong.track.album.images[0].url : null;
+
+  const trackName = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ? currentSong.name : playlist.tracks.items[0].name : null;
+
+  const previewLink = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ? currentSong.preview_url : playlist.tracks.items[0].preview_url : null;
+
+  const artistName = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ? currentSong.album.artists[0].name :
+    collectionType === 'albums' ? playlist.artists[0].name : currentSong.track.artists[0].name : null;
+
+  const artistID = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ?
+    currentSong.album.artists[0].name :
+    collectionType === 'albums' ?
+      playlist.artists[0].id : currentSong.track.artists[0].id : null;
+
+  const albumName = !isEmpty && !isLoading && playlist ? collectionType === 'songs' ? currentSong.album.name : playlist.name : null;
+
 
   return (
-    <Flex justify='space-between' gap='3em' align='center' h='100%'>
-      <Flex justify='space-evenly' gap='1.5em' align='center' ml='5em'>
-        <Image src={currentSongGeneral.coverURL} fallbackSrc='https://via.placeholder.com/64' maxW='64px' maxH='64px' />
-        <Flex direction='column' ml='1em'>
-          <Box>
-            <Text w='100%' fontWeight='700' display='inline' mr='1em' color='white'>{currentSongGeneral.name}</Text>
-            <span>{currentSongGeneral.explicit ? <i className="bi bi-explicit"></i> : null}</span>
-          </Box>
-          <Text minW='100%' color='white'>{currentSongGeneral.albumOfTrack}</Text>
-          <Link to={link}><Text color='white' _hover={{
-            cursor: 'pointer',
-            color: 'primary'
-          }}>{currentSongGeneral.artist}</Text></Link>
+    <ErrorBoundary>
+      <Flex justify='space-between' gap='3em' align='center' h='100%'>
+        <Flex justify='space-evenly' gap='1.5em' align='center' ml='5em'>
+          <Image src={coverImage} fallbackSrc='https://via.placeholder.com/64' maxW='64px' maxH='64px' />
+          <Flex direction='column' ml='1em'>
+            <Box>
+              <Text w='100%' fontWeight='700' display='inline' mr='1em' color='white'>{trackName}</Text>
+              <span>{currentSong.explicit ? <i className="bi bi-explicit"></i> : null}</span>
+            </Box>
+            <Text minW='100%' color='white'>{albumName}</Text>
+            <Link to={link}><Text color='white'
+              _hover={{
+                cursor: 'pointer',
+                color: 'primary'
+              }}>{artistName}</Text></Link>
+          </Flex>
+        </Flex>
+        <Flex justify='flex-start' w='64%'>
+          <Flex justify='center' gap='3em' align='center' h='100%'>
+            <i className="bi bi-skip-start next-icon"
+              onClick={(e) => playPreviousSong(e)}></i>
+
+            <audio src={previewLink} id='audio' controls></audio>
+
+            {isPlaying ? <i className="bi bi-pause play-icon" onClick={() => onPlay()}></i> : <i className="bi bi-play-fill play-icon" onClick={() => onPlay()}></i>}
+          </Flex>
         </Flex>
       </Flex>
-      <Flex justify='flex-start' w='64%'>
-        <Flex justify='center' gap='3em' align='center' h='100%'>
-          <i className="bi bi-skip-start next-icon"
-            onClick={(e) => playPreviousSong(e)}></i>
-
-          <audio src={currentSongURL === null ? '' : currentSongURL} id='audio' controls></audio>
-
-          {isPlaying ? <i className="bi bi-pause play-icon" onClick={() => onPlay()}></i> : <i className="bi bi-play-fill play-icon" onClick={() => onPlay()}></i>}
-          <i className="bi bi-skip-end next-icon" onClick={() => playNextSong()}></i>
-        </Flex>
-      </Flex>
-    </Flex>
+    </ErrorBoundary>
   )
 };
 export default AudioPlayer;

@@ -14,7 +14,7 @@ const Header = () => {
         <CloseButton onClick={() => document.querySelector('#token-alert').style.display = 'none'} ml='auto' />
       </Alert>
 
-      <Flex w='100%' align='center' mt='5em' justify='flex-start'>
+      <Flex w='100%' align='center' mt='5em' justify='center'>
         <Text fontWeight='700' fontSize='2em' ml='5em' mr='5em'>
           AppLogo</Text>
         <Search />

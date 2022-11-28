@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+
 import { Flex, Grid, Text, Spinner } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 
 import SongCollectionsList from '../../SongCollectionsList/SongCollectionsList';
 import SongsList from '../../SongsList/SongsList';
@@ -17,10 +18,10 @@ const SearchResultsPage = () => {
         return (<Grid gridTemplateColumns='1fr 1fr 1fr 1fr 1fr' gridTemplateRows='1fr 1fr 1fr' w='90%' m='0 auto 0 10em'><SongsList /></Grid>)
       }
       case 'albums': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList type='albums' /></Flex>)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='ALBUMS' /></Flex>)
       }
       case 'playlists': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'> <SongCollectionsList type='playlists' /></Flex >)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='PLAYLIST' /></Flex >)
       }
       case 'artists': {
         return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><ArtistsList /></Flex >)
@@ -35,7 +36,7 @@ const SearchResultsPage = () => {
 
             <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>ALBUMS</Text>
             <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
-              <SongCollectionsList type='ALBUMS' />
+              <SongCollectionsList collectionType='ALBUMS' />
             </Flex>
 
             <Text fontSize='2.5em' w='100%' m='3em 0 1em' paddingInlineStart='5em'>ARTISTS</Text>
@@ -43,10 +44,10 @@ const SearchResultsPage = () => {
               <ArtistsList />
             </Flex>
 
-            <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
+            {/* <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
             <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
-              <SongCollectionsList type='PLAYLISTS' />
-            </Flex>
+              <SongCollectionsList collectionType='PLAYLISTS' />
+            </Flex> */}
           </>
         )
       }

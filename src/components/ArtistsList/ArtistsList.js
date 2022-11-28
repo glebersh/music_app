@@ -12,7 +12,6 @@ const ArtistsList = () => {
     name={item.name}
     imgURL={item.images[1] ? item.images[1].url : null}
     width={item.images[1] ? item.images[1].width : null}
-    genre={item.genres ? item.genres[0] : null}
   />)
   )
 

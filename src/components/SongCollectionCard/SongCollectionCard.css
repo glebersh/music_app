@@ -1,0 +1,14 @@
+.song-collection-icon {
+  position: absolute;
+  bottom: 36%;
+  left: 42%;
+  font-size: 55px;
+  opacity: 0;
+  color: rgb(231, 231, 231);
+  transition: '0.44s';
+}
+
+img:hover+.song-collection-icon {
+  opacity: 1;
+  transition: '0.44s';
+}

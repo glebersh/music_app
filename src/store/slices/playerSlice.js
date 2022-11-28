@@ -1,38 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+
+export const getSongCollectionTracks = createAsyncThunk(
+  'playerData/getSongCollectionTracks',
+  async function ({ id, playlistType }, { dispatch, getState }) {
+    const state = getState();
+    await fetch(`https://api.spotify.com/v1/${playlistType}/${id}?market=US`,
+      {
+        headers: {
+          Authorization: `Bearer ${state.authReducer}`,
+        }
+      })
+      .then(result => result.json())
+      .then(result => dispatch(setSongsCollection(result)))
+      .then(() => dispatch(setSongsCollectionType(playlistType)))
+      .catch(error => console.log(error.message));
+  });
+
+
 const playerSlice = createSlice({
   name: 'playerData',
   initialState: {
-    songs: null,
-    currentSong: '',
-    currentSongID: '',
-    currentSongGeneral: {},
+    songsCollection: {},
+    songsCollectionType: 'songs',
     isPlaying: false,
-    previousSong: '',
-    previousSongID: '',
+    currentSong: {},
+    previousSong: {},
     nextSong: {},
-
   },
   reducers: {
-    setSongs(state, action) {
-      state.songs = action.payload;
+    setSongsCollection(state, action) {
+      state.songsCollection = action.payload;
+      state.currentSong = state.songsCollectionType === 'albums' || state.songsCollectionType === 'playlists' ? state.songsCollection.tracks.items[0] : state.currentSong;
     },
-    setCurrentSong(state, action) {
-      state.currentSong = action.payload;
-    },
-    setCurrentSongID(state, action) {
-      state.currentSongID = action.payload;
-    },
-    setCurrentSongGeneral(state, action) {
-      state.currentSongGeneral = action.payload;
+    setSongsCollectionType(state, action) {
+      state.songsCollectionType = action.payload;
     },
     setIsPlaying(state) {
       state.isPlaying = !state.isPlaying;
     },
+    setIsPlayingTrue(state) {
+      state.isPlaying = true;
+    },
+    setCurrentSong(state, action) {
+      state.currentSong = action.payload;
+    },
     setPreviousSong(state, action) {
-      state.previousSong = action.payload.currentSongURL;
-      state.previousSongID = action.payload.currentSongID;
+      state.previousSong = action.payload;
     },
     setNextSong(state, action) {
       state.nextSong = action.payload;
@@ -40,8 +55,12 @@ const playerSlice = createSlice({
   }
 });
 
-export const { setSongs, setCurrentSong,
-  setIsPlaying, setCurrentSongID,
-  setPreviousSong, setCurrentSongGeneral,
+export const { setSongsCollection,
+  setSongsCollectionType,
+  setIsPlaying,
+  setIsPlayingTrue,
+  setCurrentSong,
+  setPreviousSong,
   setNextSong } = playerSlice.actions;
+
 export default playerSlice.reducer;
