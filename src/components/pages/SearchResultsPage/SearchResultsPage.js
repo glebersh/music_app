@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Grid, Text, Spinner } from '@chakra-ui/react';
+import { Flex, Grid, Text, Spinner, Alert, AlertTitle, AlertDescription, AlertIcon } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import SongCollectionsList from '../../SongCollectionsList/SongCollectionsList';
@@ -8,9 +8,9 @@ import SongsList from '../../SongsList/SongsList';
 import ArtistsList from '../../ArtistsList/ArtistsList';
 
 const SearchResultsPage = () => {
-  const isEmpty = useSelector(state => state.searchReducer.isEmpty);
-  const isLoading = useSelector(state => state.searchReducer.isLoading);
   const currentSearchCategory = useSelector(state => state.searchReducer.searchCategory);
+  const loadingStatus = useSelector(state => state.searchReducer.loadingStatus);
+  const errorStatus = useSelector(state => state.searchReducer.errorStatus);
 
   const pageContent = () => {
     switch (currentSearchCategory) {
@@ -21,7 +21,7 @@ const SearchResultsPage = () => {
         return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='ALBUMS' /></Flex>)
       }
       case 'playlists': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='PLAYLIST' /></Flex >)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='PLAYLISTS' /></Flex >)
       }
       case 'artists': {
         return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><ArtistsList /></Flex >)
@@ -44,10 +44,10 @@ const SearchResultsPage = () => {
               <ArtistsList />
             </Flex>
 
-            {/* <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
+            <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
             <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
               <SongCollectionsList collectionType='PLAYLISTS' />
-            </Flex> */}
+            </Flex>
           </>
         )
       }
@@ -57,7 +57,16 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      {isEmpty ? null : isLoading ? <Spinner w='200px' h='200px' /> : <>{pageContent()}</>}
+      {errorStatus &&
+        <Alert status='error'>
+          <AlertIcon />
+          <AlertTitle>Something went wrong...</AlertTitle>
+          <AlertDescription>Check the API response</AlertDescription>
+        </Alert>}
+
+      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' />}
+
+      {loadingStatus === 'resolved' && pageContent()}
     </>
   )
 };

@@ -25,7 +25,7 @@ const ArtistPage = () => {
         (
           <>
             <Flex w='100%' justify='center' gap='5em' mt='5em'>
-              <Image src={data.images ? data.images[0].url : null} />
+              <Image src={data.images ? data.images[0].url : null} loading="lazy" />
               <Box>
                 <Text fontSize='3em'>{data.name}</Text>
                 <Tag fontSize='1em'>Artist</Tag>

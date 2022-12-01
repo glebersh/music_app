@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { Image, Flex, Tag, Text, Box } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
-
-
 const ArtistCard = ({ name, imgURL, artistID }) => {
   const link = `artists/${artistID}`;
   const isEmpty = useSelector(state => state.searchReducer.isEmpty);
@@ -15,7 +13,7 @@ const ArtistCard = ({ name, imgURL, artistID }) => {
       <Flex direction='column' gap='.5em' justify='flex-start' mt='3em'
         align='flex-start'>
 
-        <Image src={imgURL} w='240px' h='240px'
+        <Image src={imgURL} w='240px' h='240px' loading="lazy"
           fallbackSrc='https://via.placeholder.com/240' />
 
         <Link to={link}><Text fontSize='1em' transtion='color 0.33s'
