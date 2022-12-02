@@ -3,34 +3,37 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getArtistGeneral = createAsyncThunk(
   'artist/getArtistGeneral',
-  async function (artistID, { dispatch, getState }) {
-    const state = getState();
-    await fetch(`https://api.spotify.com/v1/artists/${artistID}`,
-      {
-        headers: {
-          Authorization: `Bearer ${state.authReducer}`,
-        }
-      })
-      .then(response => response.json())
-      .then(response => dispatch(setArtist(response)))
-      .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?market=US`,
+  async function (artistID, { dispatch, getState, rejectWithValue }) {
+    try {
+      const state = getState();
+      await fetch(`https://api.spotify.com/v1/artists/${artistID}`,
         {
           headers: {
             Authorization: `Bearer ${state.authReducer}`,
           }
-        }))
-      .then(response => response.json())
-      .then(response => dispatch(setArtistTopTracks(response)))
-      .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?market=US&limit=10`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.authReducer}`,
-          }
-        }))
-      .then(response => response.json())
-      .then(response => dispatch(setArtistTopAlbums(response)))
-      .then(() => dispatch(setLoading()))
-      .catch(error => console.log(error.message))
+        })
+        .then(response => response.json())
+        .then(response => dispatch(setArtist(response)))
+        .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks?market=US`,
+          {
+            headers: {
+              Authorization: `Bearer ${state.authReducer}`,
+            }
+          }))
+        .then(response => response.json())
+        .then(response => dispatch(setArtistTopTracks(response)))
+        .then(() => fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?market=US&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${state.authReducer}`,
+            }
+          }))
+        .then(response => response.json())
+        .then(response => dispatch(setArtistTopAlbums(response)))
+        .catch(error => console.log(error.message))
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   });
 
 
@@ -40,7 +43,8 @@ const artistInfoSlice = createSlice({
     artistInfo: {},
     artistTopTracks: {},
     artistTopAlbums: {},
-    isLoading: true,
+    loadingStatus: '',
+    errorStatus: null,
   },
   reducers: {
     setArtist(state, action) {
@@ -51,10 +55,19 @@ const artistInfoSlice = createSlice({
     },
     setArtistTopAlbums(state, action) {
       state.artistTopAlbums = action.payload;
-    },
-    setLoading(state) {
-      state.isLoading = false;
     }
+  },
+  extraReducers: {
+    [getArtistGeneral.pending]: (state) => {
+      state.loadingStatus = 'loading';
+    },
+    [getArtistGeneral.fulfilled]: (state) => {
+      state.loadingStatus = 'resolved';
+    },
+    [getArtistGeneral.rejected]: (state, action) => {
+      state.errorStatus = action.payload;
+      state.loadingStatus = 'rejected';
+    },
   }
 });
 

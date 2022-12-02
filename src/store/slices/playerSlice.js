@@ -4,18 +4,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getSongCollectionTracks = createAsyncThunk(
   'playerData/getSongCollectionTracks',
-  async function ({ id, playlistType }, { dispatch, getState }) {
-    const state = getState();
-    const repsonse = await fetch(`https://api.spotify.com/v1/${playlistType}/${id}?market=US`,
-      {
-        headers: {
-          Authorization: `Bearer ${state.authReducer}`,
-        }
-      })
-    const data = await repsonse.json();
-    dispatch(setSongsCollectionType(playlistType))
-    dispatch(setSongsCollection(data))
-    // .catch(error => console.log(error.message));
+  async function ({ id, playlistType }, { dispatch, getState, rejectWithValue }) {
+    try {
+      const state = getState();
+      const repsonse = await fetch(`https://api.spotify.com/v1/${playlistType}/${id}?market=US`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.authReducer}`,
+          }
+        })
+      const data = await repsonse.json();
+      dispatch(setSongsCollectionType(playlistType))
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   });
 
 
@@ -28,11 +31,14 @@ const playerSlice = createSlice({
     currentSong: {},
     previousSong: {},
     nextSong: {},
+    loadingStatus: '',
+    errorStatus: null,
   },
   reducers: {
     setSongsCollection(state, action) {
       state.songsCollection = action.payload;
-      state.currentSong = state.songsCollectionType === 'albums' || state.songsCollectionType === 'playlists' ? state.songsCollection.tracks.items[0] : state.currentSong;
+
+      state.loadingStatus = 'resolved';
     },
     setSongsCollectionType(state, action) {
       state.songsCollectionType = action.payload;
@@ -51,6 +57,22 @@ const playerSlice = createSlice({
     },
     setNextSong(state, action) {
       state.nextSong = action.payload;
+    },
+  },
+  extraReducers: {
+    [getSongCollectionTracks.pending]: (state) => {
+      state.loadingStatus = 'loading';
+    },
+    [getSongCollectionTracks.fulfilled]: (state, action) => {
+      state.songsCollection = action.payload;
+      state.currentSong = state.songsCollectionType === 'albums'
+        || state.songsCollectionType === 'playlists' ?
+        state.songsCollection?.tracks?.items[0] : state.currentSong;
+      state.loadingStatus = 'resolved';
+    },
+    [getSongCollectionTracks.rejected]: (state, action) => {
+      state.errorStatus = action.payload;
+      state.loadingStatus = 'rejected';
     },
   }
 });

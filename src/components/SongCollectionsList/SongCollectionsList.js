@@ -17,8 +17,19 @@ const SongCollectionsList = ({ collectionType }) => {
     }
   });
 
-  const loadingStatus = useSelector(state => state.searchReducer.loadingStatus);
-  const errorStatus = useSelector(state => state.searchReducer.errorStatus);
+  const loadingStatus = useSelector(state => {
+    if (collectionType === 'ARTIST_ALBUMS') {
+      return state.artistInfoReducer.loadingStatus;
+    }
+    return state.searchReducer.loadingStatus;
+  });
+
+  const errorStatus = useSelector(state => {
+    if (collectionType === 'ARTIST_ALBUMS') {
+      return state.artistInfoReducer.errorStatus;
+    }
+    return state.searchReducer.errorStatus;
+  });
 
   return (
     <>

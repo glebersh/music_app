@@ -12,8 +12,19 @@ const SongsList = ({ type }) => {
     return state.searchReducer?.searchResult?.tracks?.items;
   });
 
-  const loadingStatus = useSelector(state => state.searchReducer.loadingStatus);
-  const errorStatus = useSelector(state => state.searchReducer.errorStatus);
+  const loadingStatus = useSelector(state => {
+    if (type === 'ARTIST_TOP_TRACKS') {
+      return state.artistInfoReducer.loadingStatus;
+    }
+    return state.searchReducer.loadingStatus;
+  });
+
+  const errorStatus = useSelector(state => {
+    if (type === 'ARTIST_TOP_TRACKS') {
+      return state.artistInfoReducer.errorStatus;
+    }
+    return state.searchReducer.errorStatus;
+  });
 
   return (
     <>

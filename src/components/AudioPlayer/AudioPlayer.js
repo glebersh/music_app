@@ -15,8 +15,8 @@ const AudioPlayer = () => {
   const playlist = useSelector(state => state.playerReducer.songsCollection);
   const collectionType = useSelector(state => state.playerReducer.songsCollectionType);
 
-  const loadingStatus = useSelector(state => state.searchReducer.loadingStatus);
-  const errorStatus = useSelector(state => state.searchReducer.errorStatus);
+  const loadingStatus = useSelector(state => state.playerReducer.loadingStatus);
+  const errorStatus = useSelector(state => state.playerReducer.errorStatus);
 
   const audioPlayer = document.querySelector('#audio');
   // const link = isEmpty && currentSong ? '' : `artists/${currentSong.artists[0].id}`;
@@ -69,7 +69,7 @@ const AudioPlayer = () => {
     collectionType === 'albums' ?
       playlist?.images[0]?.url : currentSong?.track?.album?.images[0]?.url : null;
 
-  const trackName = loadingStatus === 'resolved' ? collectionType === 'songs' && currentSong?.name : null;
+  const trackName = loadingStatus === 'resolved' && currentSong?.name;
 
   const previewLink = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.preview_url : currentSong?.preview_url : null;
 
@@ -87,14 +87,14 @@ const AudioPlayer = () => {
   return (
     <ErrorBoundary>
       <Flex justify='space-between' gap='3em' align='center' h='100%'>
-        <Flex justify='space-evenly' gap='1.5em' align='center' ml='5em'>
+        <Flex justify='space-evenly' gap='1.5em' align='center' ml='5em' minW='300px' p='1em'>
           <Image src={coverImage} fallbackSrc='https://via.placeholder.com/64' maxW='64px' maxH='64px' loading="lazy" />
           <Flex direction='column' ml='1em'>
             <Box>
               <Text w='100%' fontWeight='700' display='inline' mr='1em' color='white'>{trackName}</Text>
               <span>{currentSong?.explicit && <i className="bi bi-explicit"></i>}</span>
             </Box>
-            <Text minW='100%' color='white'>{albumName}</Text>
+            <Text color='white' minW='300px'>{albumName}</Text>
             <Link to={link}><Text color='white'
               _hover={{
                 cursor: 'pointer',

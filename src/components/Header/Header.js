@@ -15,8 +15,8 @@ const Header = () => {
       </Alert>
 
       <Flex w='100%' align='center' mt='5em' justify='center'>
-        <Text fontWeight='700' fontSize='2em' ml='5em' mr='5em'>
-          AppLogo</Text>
+        {/* <Text fontWeight='700' fontSize='2em' ml='5em' mr='5em'>
+          AppLogo</Text> */}
         <Search />
         <Button onClick={toggleColorMode}
           variant='outline'
