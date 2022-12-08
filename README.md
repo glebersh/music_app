@@ -5,9 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 _Currently in work_
 
 ## Features
-** Search music by multiple categories
-** Listen to the demos of tracks
-** Redirect to artist page
+* Search music by multiple categories
+* Listen to the demos of tracks
+* Link to the artist page
 
 ## Tech Stack & Tools
 * React
