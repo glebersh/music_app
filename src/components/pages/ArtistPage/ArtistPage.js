@@ -35,15 +35,15 @@ const ArtistPage = () => {
             <Image src={data?.images[0]?.url} loading="lazy" />
             <Box>
               <Text fontSize='3em'>{data?.name}</Text>
-              <Tag fontSize='1em'>Artist</Tag>
-              <Text>Popularity: {data?.popularity}</Text>
+              <Tag fontSize='1em' mt='1em'>Artist</Tag>
+              <Text mt='1em'>Popularity: {data?.popularity}</Text>
               {data.genres &&
-                <h2>Genres:
-                  {data?.genres.map(item => <Tag key={item}>{item}</Tag>)}
-                </h2>}
-              <Text>Followers: {data?.followers?.total}</Text>
+                <Text mt='1em'>Genres:
+                  {data?.genres.map(item => <Tag key={item} ml='.5em'>{item}</Tag>)}
+                </Text>}
+              <Text mt='1em'>Followers: {data?.followers?.total}</Text>
               <Text border='1px solid lightgray' textAlign='center'
-                p='.2em' borderRadius='5px' transition='.33s'
+                p='.2em' borderRadius='5px' transition='.33s' mt='1em' maxW='200px'
                 _hover={{ color: 'primary', backgroundColor: '#A0A0A020', transition: '.33s' }}><Link to='/'>BACK TO SEARCH</Link></Text>
             </Box>
           </Flex>

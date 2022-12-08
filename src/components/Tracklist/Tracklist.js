@@ -33,19 +33,19 @@ const Tracklist = () => {
         <Flex m='0 auto' w='80%' justify='space-between' align='center' id='tracklist' pb='20px'>
           <Box flex='1' maxW='500px'>
             {songsCollectionType === 'albums' ?
-              playlist?.tracks?.items.map(item => <TracklistItem key={item.id} {...item} />)
-              : playlist?.items.map(item => <TracklistItem key={item.id} {...item} />)}
+              playlist?.tracks?.items?.map(item => <TracklistItem key={item.id} {...item} />)
+              : playlist?.items?.map(item => <TracklistItem key={item.id} {...item} />)
+            }
           </Box>
           <Box>
             <Image src={coverImage} w='500px' />
-            <Text fontWeight='700'
+            <Text fontWeight='700' color='white'
               fontSize='24px' textAlign='center'>{albumName}</Text>
           </Box>
         </Flex>
         : null}
     </>
   )
-
 };
 
 export default Tracklist;
@@ -55,8 +55,8 @@ const TracklistItem = (props) => {
   const currentSong = useSelector(state => state.playerReducer.currentSong);
 
   const millisToMinutesAndSeconds = (milliseconds) => {
-    var minutes = Math.floor(milliseconds / 60000);
-    var seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+    let minutes = Math.floor(milliseconds / 60000);
+    let seconds = ((milliseconds % 60000) / 1000).toFixed(0);
     return (
       seconds == 60 ?
         (minutes + 1) + ":00" :

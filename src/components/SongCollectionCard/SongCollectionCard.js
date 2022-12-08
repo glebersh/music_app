@@ -2,7 +2,7 @@ import { Box, Image, Text, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getSongCollectionTracks, setIsPlayingTrue, setPreviousSong } from '../../store/slices/playerSlice';
+import { getSongCollectionTracks, setIsPlaying, setPreviousSong } from '../../store/slices/playerSlice';
 import './SongCollectionCard.css';
 
 
@@ -18,7 +18,6 @@ const SongCollectionCard = (props) => {
   const onAlbumClick = () => {
     dispatch(setPreviousSong(currentSong));
     dispatch(getSongCollectionTracks({ id, playlistType }));
-    dispatch(setIsPlayingTrue(true));
   };
 
   return (

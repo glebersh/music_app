@@ -14,9 +14,9 @@ const Header = () => {
         <CloseButton onClick={() => document.querySelector('#token-alert').style.display = 'none'} ml='auto' />
       </Alert>
 
-      <Flex w='100%' align='center' mt='5em' justify='center'>
-        {/* <Text fontWeight='700' fontSize='2em' ml='5em' mr='5em'>
-          AppLogo</Text> */}
+      <Flex w='100%' align='center' mt='5em' justify='center' direction={{ xs: "column", xl: "row" }}>
+        <Text fontWeight='700' fontSize='2em' ml='5em' mr='5em'>
+          AppLogo</Text>
         <Search />
         <Button onClick={toggleColorMode}
           variant='outline'

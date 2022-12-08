@@ -6,7 +6,6 @@ import './Footer.css';
 
 const Footer = () => {
   const [tracklistVisibible, setTracklistVisibility] = useState(false);
-  const { colorMode } = useColorMode();
 
   return (
     <footer>

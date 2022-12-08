@@ -15,8 +15,8 @@ export const getDataFromSearch = createAsyncThunk(
           }
         })
       const data = await response.json();
-      dispatch(setCurrentSong(data.tracks.items[0]));
-      dispatch(setSongsCollection(data.tracks));
+      // dispatch(setCurrentSong(data.tracks.items[0]));
+      // dispatch(setSongsCollection(data.tracks));
       return data;
     }
     catch (error) {
@@ -41,18 +41,19 @@ const searchSlice = createSlice({
       state.searchCategory = action.payload;
     }
   },
-  extraReducers: {
-    [getDataFromSearch.pending]: (state) => {
-      state.loadingStatus = 'loading';
-    },
-    [getDataFromSearch.fulfilled]: (state, action) => {
-      state.searchResult = action.payload;
-      state.loadingStatus = 'resolved';
-    },
-    [getDataFromSearch.rejected]: (state, action) => {
-      state.errorStatus = action.payload;
-      state.loadingStatus = 'rejected';
-    }
+  extraReducers: (builder) => {
+    builder
+      .addCase(getDataFromSearch.pending, (state, action) => {
+        state.loadingStatus = 'loading';
+      })
+      .addCase(getDataFromSearch.fulfilled, (state, action) => {
+        state.searchResult = action.payload;
+        state.loadingStatus = 'resolved';
+      })
+      .addCase(getDataFromSearch.rejected, (state, action) => {
+        state.errorStatus = action.payload;
+        state.loadingStatus = 'rejected';
+      })
   }
 });
 

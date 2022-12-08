@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './SongCard.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentSong, setIsPlaying, setNextSong, setPreviousSong, setSongsCollectionType } from '../../store/slices/playerSlice';
+import { setCurrentSong, setIsPlaying, setPreviousSong, setSongsCollectionType } from '../../store/slices/playerSlice';
 
 const SongCard = (props) => {
 
@@ -14,11 +14,12 @@ const SongCard = (props) => {
   const currentSong = useSelector(state => state.playerReducer.currentSong);
   const isEmpty = useSelector(state => state.searchReducer.isEmpty);
   const isLoading = useSelector(state => state.searchReducer.isLoading);
+
   const dispatch = useDispatch();
 
   const millisToMinutesAndSeconds = (milliseconds) => {
-    var minutes = Math.floor(milliseconds / 60000);
-    var seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+    let minutes = Math.floor(milliseconds / 60000);
+    let seconds = ((milliseconds % 60000) / 1000).toFixed(0);
     return (
       seconds == 60 ?
         (minutes + 1) + ":00" :
@@ -26,7 +27,7 @@ const SongCard = (props) => {
     );
   };
 
-  const onPlayHandler = (e, playbleLink) => {
+  const onPlayHandler = (playbleLink) => {
     if (playbleLink !== currentSong?.preview_url && isPlaying) {
       dispatch(setPreviousSong(currentSong));
       dispatch(setCurrentSong(props));
@@ -66,9 +67,9 @@ const SongCard = (props) => {
         <Flex direction='column' mr='3em'>
           <Text ml='auto' color='lightgray'>{millisToMinutesAndSeconds(props?.duration_ms)}</Text>
           {props.preview_url === null ? null : isPlaying && currentSong?.id === props.id ? <i className='bi bi-pause song-card-icon' id={props.id}
-            onClick={(e) => onPlayHandler(e, props.preview_url)}
+            onClick={() => onPlayHandler(props.preview_url)}
           /> : <i className='bi bi-play-fill song-card-icon' id={props.id}
-            onClick={(e) => onPlayHandler(e, props.preview_url)}
+            onClick={() => onPlayHandler(props.preview_url)}
           />}
         </Flex>
 

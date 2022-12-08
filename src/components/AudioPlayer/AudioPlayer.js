@@ -2,7 +2,7 @@ import { Flex, Box, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentSong, setIsPlaying, setNextSong, setPreviousSong, setSongsCollectionType } from '../../store/slices/playerSlice';
+import { setCurrentSong, setIsPlaying, setPreviousSong, setSongsCollectionType } from '../../store/slices/playerSlice';
 import './AudioPlayer.css';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
@@ -16,14 +16,11 @@ const AudioPlayer = () => {
   const collectionType = useSelector(state => state.playerReducer.songsCollectionType);
 
   const loadingStatus = useSelector(state => state.playerReducer.loadingStatus);
-  const errorStatus = useSelector(state => state.playerReducer.errorStatus);
 
   const audioPlayer = document.querySelector('#audio');
-  // const link = isEmpty && currentSong ? '' : `artists/${currentSong.artists[0].id}`;
-  const link = '';
 
   useEffect(() => {
-    if (document.readyState === 'complete') {
+    if (audioPlayer) {
       if (isPlaying) {
         audioPlayer.play();
       }
@@ -69,17 +66,19 @@ const AudioPlayer = () => {
     collectionType === 'albums' ?
       playlist?.images[0]?.url : currentSong?.track?.album?.images[0]?.url : null;
 
-  const trackName = loadingStatus === 'resolved' && currentSong?.name;
+  const trackName = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.name : collectionType === 'playlists' ?
+    currentSong?.track?.name : currentSong?.name : null;
 
-  const previewLink = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.preview_url : currentSong?.preview_url : null;
+  const previewLink = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.preview_url : collectionType === 'playlists' ?
+    currentSong?.track?.preview_url : currentSong?.preview_url : null;
 
   const artistName = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.album?.artists[0]?.name :
     collectionType === 'albums' ? playlist?.artists[0]?.name : currentSong?.track?.artists[0]?.name : null;
 
   const artistID = loadingStatus === 'resolved' ? collectionType === 'songs' ?
-    currentSong?.album?.artists[0]?.name :
+    currentSong?.artists[0]?.id :
     collectionType === 'albums' ?
-      playlist?.artists[0]?.id : currentSong?.track?.artists[0]?.id : null;
+      currentSong?.artists[0]?.id : currentSong?.track?.artists[0]?.id : null;
 
   const albumName = loadingStatus === 'resolved' ? collectionType === 'songs' ? currentSong?.album?.name : playlist?.name : null;
 
@@ -95,7 +94,7 @@ const AudioPlayer = () => {
               <span>{currentSong?.explicit && <i className="bi bi-explicit"></i>}</span>
             </Box>
             <Text color='white' minW='300px'>{albumName}</Text>
-            <Link to={link}><Text color='white'
+            <Link to={loadingStatus === 'resolved' ? `artists/${artistID}` : ''}><Text color='white'
               _hover={{
                 cursor: 'pointer',
                 color: 'primary'

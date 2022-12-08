@@ -57,17 +57,18 @@ const artistInfoSlice = createSlice({
       state.artistTopAlbums = action.payload;
     }
   },
-  extraReducers: {
-    [getArtistGeneral.pending]: (state) => {
-      state.loadingStatus = 'loading';
-    },
-    [getArtistGeneral.fulfilled]: (state) => {
-      state.loadingStatus = 'resolved';
-    },
-    [getArtistGeneral.rejected]: (state, action) => {
-      state.errorStatus = action.payload;
-      state.loadingStatus = 'rejected';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getArtistGeneral.pending, (state) => {
+        state.loadingStatus = 'loading';
+      })
+      .addCase(getArtistGeneral.fulfilled, (state) => {
+        state.loadingStatus = 'resolved';
+      })
+      .addCase(getArtistGeneral.rejected, (state, action) => {
+        state.errorStatus = action.payload;
+        state.loadingStatus = 'rejected';
+      })
   }
 });
 

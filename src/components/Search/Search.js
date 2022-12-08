@@ -40,7 +40,7 @@ const Search = () => {
             display='inline-block' w='50%' />
           <Input type='submit' value='Search'
             _hover={hoverStyle}
-            w='10%'
+            w='10%' minW='100px'
             ml='2em'
             display='inline-block' />
         </Flex>

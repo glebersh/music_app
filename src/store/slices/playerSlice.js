@@ -14,7 +14,7 @@ export const getSongCollectionTracks = createAsyncThunk(
           }
         })
       const data = await repsonse.json();
-      dispatch(setSongsCollectionType(playlistType))
+      dispatch(setSongsCollectionType(playlistType));
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -37,7 +37,6 @@ const playerSlice = createSlice({
   reducers: {
     setSongsCollection(state, action) {
       state.songsCollection = action.payload;
-
       state.loadingStatus = 'resolved';
     },
     setSongsCollectionType(state, action) {
@@ -51,6 +50,7 @@ const playerSlice = createSlice({
     },
     setCurrentSong(state, action) {
       state.currentSong = action.payload;
+      state.loadingStatus = 'resolved';
     },
     setPreviousSong(state, action) {
       state.previousSong = action.payload;
@@ -59,21 +59,22 @@ const playerSlice = createSlice({
       state.nextSong = action.payload;
     },
   },
-  extraReducers: {
-    [getSongCollectionTracks.pending]: (state) => {
-      state.loadingStatus = 'loading';
-    },
-    [getSongCollectionTracks.fulfilled]: (state, action) => {
-      state.songsCollection = action.payload;
-      state.currentSong = state.songsCollectionType === 'albums'
-        || state.songsCollectionType === 'playlists' ?
-        state.songsCollection?.tracks?.items[0] : state.currentSong;
-      state.loadingStatus = 'resolved';
-    },
-    [getSongCollectionTracks.rejected]: (state, action) => {
-      state.errorStatus = action.payload;
-      state.loadingStatus = 'rejected';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getSongCollectionTracks.pending, (state, action) => {
+        state.loadingStatus = 'loading';
+      })
+      .addCase(getSongCollectionTracks.fulfilled, (state, action) => {
+        state.songsCollection = action.payload;
+        state.currentSong = state.songsCollectionType === 'albums'
+          || state.songsCollectionType === 'playlists' ?
+          state.songsCollection?.tracks?.items[0] : state.currentSong;
+        state.loadingStatus = 'resolved';
+      })
+      .addCase(getSongCollectionTracks.rejected, (state, action) => {
+        state.errorStatus = action.payload;
+        state.loadingStatus = 'rejected';
+      })
   }
 });
 
