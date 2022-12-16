@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+
+
 export const getArtistGeneral = createAsyncThunk(
   'artist/getArtistGeneral',
   async function (artistID, { dispatch, getState, rejectWithValue }) {
@@ -74,7 +76,6 @@ const artistInfoSlice = createSlice({
 
 export const {
   setArtist,
-  setLoading,
   setArtistTopTracks,
   setArtistTopAlbums } = artistInfoSlice.actions;
 

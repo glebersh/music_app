@@ -55,9 +55,6 @@ const playerSlice = createSlice({
     setPreviousSong(state, action) {
       state.previousSong = action.payload;
     },
-    setNextSong(state, action) {
-      state.nextSong = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -83,7 +80,6 @@ export const { setSongsCollection,
   setIsPlaying,
   setIsPlayingTrue,
   setCurrentSong,
-  setPreviousSong,
-  setNextSong } = playerSlice.actions;
+  setPreviousSong } = playerSlice.actions;
 
 export default playerSlice.reducer;

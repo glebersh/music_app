@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setCurrentSong, setSongsCollection } from "./playerSlice";
 
 export const getDataFromSearch = createAsyncThunk(
   'artist/getDataFromSearch',
 
-  async function (urlFormattedText, { dispatch, getState, rejectWithValue }) {
+  async function (urlFormattedText, { getState, rejectWithValue }) {
     try {
       const state = getState();
       const response = await fetch(`https://api.spotify.com/v1/search?q=${urlFormattedText}&type=artist,track,album,playlist&market=US&limit=15`,
@@ -15,8 +14,6 @@ export const getDataFromSearch = createAsyncThunk(
           }
         })
       const data = await response.json();
-      // dispatch(setCurrentSong(data.tracks.items[0]));
-      // dispatch(setSongsCollection(data.tracks));
       return data;
     }
     catch (error) {
@@ -43,7 +40,7 @@ const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getDataFromSearch.pending, (state, action) => {
+      .addCase(getDataFromSearch.pending, (state) => {
         state.loadingStatus = 'loading';
       })
       .addCase(getDataFromSearch.fulfilled, (state, action) => {
