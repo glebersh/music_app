@@ -1,0 +1,556 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App tests Should match snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        data-testid="app-container"
+      >
+        <div
+          class="chakra-alert css-6r3282"
+          data-testid="alert-toast"
+          id="token-alert"
+          role="alert"
+        >
+          <span
+            class="chakra-alert__icon css-1c6vscd"
+          >
+            <svg
+              class="chakra-icon css-fi0ww0"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          Keep in mind, that access token expire time is 1 hour, after this time you will be redirected to login page!
+          <button
+            aria-label="Close"
+            class="css-1b5eo55"
+            role="alert-close-button"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="chakra-icon css-onkibi"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="css-1jzcfnc"
+        >
+          <p
+            class="chakra-text css-9br895"
+          >
+            AppLogo
+          </p>
+          <div
+            class="css-8atqhb"
+          >
+            <form>
+              <div
+                class="css-zqq8sv"
+              >
+                <input
+                  class="chakra-input css-15u1lqs"
+                  type="search"
+                />
+                <input
+                  class="chakra-input css-hn1347"
+                  type="submit"
+                  value="Search"
+                />
+              </div>
+              <div
+                class="css-1hs5feh"
+              >
+                <span
+                  class="css-13tvnpb"
+                >
+                  Multi
+                </span>
+                <span
+                  class="css-13tvnpb"
+                >
+                  Songs
+                </span>
+                <span
+                  class="css-13tvnpb"
+                >
+                  Albums
+                </span>
+                <span
+                  class="css-13tvnpb"
+                >
+                  Artists
+                </span>
+                <span
+                  class="css-1qcgofx"
+                >
+                  Playlists
+                </span>
+              </div>
+            </form>
+          </div>
+          <button
+            class="chakra-button css-mol7tl"
+            type="button"
+          >
+            <svg
+              class="chakra-icon css-onkibi"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="5"
+                />
+                <path
+                  d="M12 1v2"
+                />
+                <path
+                  d="M12 21v2"
+                />
+                <path
+                  d="M4.22 4.22l1.42 1.42"
+                />
+                <path
+                  d="M18.36 18.36l1.42 1.42"
+                />
+                <path
+                  d="M1 12h2"
+                />
+                <path
+                  d="M21 12h2"
+                />
+                <path
+                  d="M4.22 19.78l1.42-1.42"
+                />
+                <path
+                  d="M18.36 5.64l1.42-1.42"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="chakra-alert css-1hwd9xd"
+          role="alert"
+        >
+          <span
+            class="chakra-alert__icon css-1c6vscd"
+          >
+            <svg
+              class="chakra-icon css-fi0ww0"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <div
+            class="chakra-alert__title css-0"
+          >
+            Something went wrong...
+          </div>
+          <div
+            class="chakra-alert__desc css-6n7j50"
+          >
+            Check the API response
+          </div>
+        </div>
+        <footer>
+          <div
+            class="css-7pf6at"
+          >
+            <div
+              class="css-18z52tn"
+            >
+              <div
+                class="css-111566g"
+              >
+                <img
+                  class="chakra-image css-1oaqw3l"
+                  loading="lazy"
+                />
+                <div
+                  class="css-13yz2if"
+                >
+                  <div
+                    class="css-0"
+                  >
+                    <p
+                      class="chakra-text css-1eep4cd"
+                    />
+                    <span />
+                  </div>
+                  <p
+                    class="chakra-text css-5q1aw8"
+                  />
+                  <a
+                    href="/"
+                  >
+                    <p
+                      class="chakra-text css-o6p92m"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div
+                class="css-1urfw6p"
+              >
+                <div
+                  class="css-18qclse"
+                >
+                  <i
+                    class="bi bi-skip-start next-icon"
+                  />
+                  <audio
+                    controls=""
+                    id="audio"
+                  />
+                  <i
+                    class="bi bi-pause play-icon"
+                  />
+                  <i
+                    class="bi bi-skip-end next-icon"
+                    id="next-button"
+                  />
+                </div>
+              </div>
+            </div>
+            <button
+              class="chakra-button css-vo7oeh"
+              type="button"
+            >
+              Show tracklist
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-testid="app-container"
+    >
+      <div
+        class="chakra-alert css-6r3282"
+        data-testid="alert-toast"
+        id="token-alert"
+        role="alert"
+      >
+        <span
+          class="chakra-alert__icon css-1c6vscd"
+        >
+          <svg
+            class="chakra-icon css-fi0ww0"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        Keep in mind, that access token expire time is 1 hour, after this time you will be redirected to login page!
+        <button
+          aria-label="Close"
+          class="css-1b5eo55"
+          role="alert-close-button"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="chakra-icon css-onkibi"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="css-1jzcfnc"
+      >
+        <p
+          class="chakra-text css-9br895"
+        >
+          AppLogo
+        </p>
+        <div
+          class="css-8atqhb"
+        >
+          <form>
+            <div
+              class="css-zqq8sv"
+            >
+              <input
+                class="chakra-input css-15u1lqs"
+                type="search"
+              />
+              <input
+                class="chakra-input css-hn1347"
+                type="submit"
+                value="Search"
+              />
+            </div>
+            <div
+              class="css-1hs5feh"
+            >
+              <span
+                class="css-13tvnpb"
+              >
+                Multi
+              </span>
+              <span
+                class="css-13tvnpb"
+              >
+                Songs
+              </span>
+              <span
+                class="css-13tvnpb"
+              >
+                Albums
+              </span>
+              <span
+                class="css-13tvnpb"
+              >
+                Artists
+              </span>
+              <span
+                class="css-1qcgofx"
+              >
+                Playlists
+              </span>
+            </div>
+          </form>
+        </div>
+        <button
+          class="chakra-button css-mol7tl"
+          type="button"
+        >
+          <svg
+            class="chakra-icon css-onkibi"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+              />
+              <path
+                d="M12 1v2"
+              />
+              <path
+                d="M12 21v2"
+              />
+              <path
+                d="M4.22 4.22l1.42 1.42"
+              />
+              <path
+                d="M18.36 18.36l1.42 1.42"
+              />
+              <path
+                d="M1 12h2"
+              />
+              <path
+                d="M21 12h2"
+              />
+              <path
+                d="M4.22 19.78l1.42-1.42"
+              />
+              <path
+                d="M18.36 5.64l1.42-1.42"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div
+        class="chakra-alert css-1hwd9xd"
+        role="alert"
+      >
+        <span
+          class="chakra-alert__icon css-1c6vscd"
+        >
+          <svg
+            class="chakra-icon css-fi0ww0"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        <div
+          class="chakra-alert__title css-0"
+        >
+          Something went wrong...
+        </div>
+        <div
+          class="chakra-alert__desc css-6n7j50"
+        >
+          Check the API response
+        </div>
+      </div>
+      <footer>
+        <div
+          class="css-7pf6at"
+        >
+          <div
+            class="css-18z52tn"
+          >
+            <div
+              class="css-111566g"
+            >
+              <img
+                class="chakra-image css-1oaqw3l"
+                loading="lazy"
+              />
+              <div
+                class="css-13yz2if"
+              >
+                <div
+                  class="css-0"
+                >
+                  <p
+                    class="chakra-text css-1eep4cd"
+                  />
+                  <span />
+                </div>
+                <p
+                  class="chakra-text css-5q1aw8"
+                />
+                <a
+                  href="/"
+                >
+                  <p
+                    class="chakra-text css-o6p92m"
+                  />
+                </a>
+              </div>
+            </div>
+            <div
+              class="css-1urfw6p"
+            >
+              <div
+                class="css-18qclse"
+              >
+                <i
+                  class="bi bi-skip-start next-icon"
+                />
+                <audio
+                  controls=""
+                  id="audio"
+                />
+                <i
+                  class="bi bi-pause play-icon"
+                />
+                <i
+                  class="bi bi-skip-end next-icon"
+                  id="next-button"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            class="chakra-button css-vo7oeh"
+            type="button"
+          >
+            Show tracklist
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

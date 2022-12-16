@@ -49,7 +49,7 @@ const App = () => {
 
 
   return (
-    <>
+    <div data-testid='app-container'>
       {!token ?
         <LoginPage /> :
         <>
@@ -60,7 +60,7 @@ const App = () => {
             </Route>
           </Routes>
         </>}
-    </>
+    </div>
   )
 };
 

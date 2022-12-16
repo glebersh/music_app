@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex direction='column' justify='center' align='center'>
+    <Flex direction='column' justify='center' align='center' data-testid='login-page-container'>
       <Image src={SpotifyLogo} maxW='320px' mt='3em' loading="lazy" />
       <Text fontSize='4em' color='primary' letterSpacing='.2em' mt='2em'>LOGIN</Text>
       <Flex h='40px' w='200px' border='1px solid lightgray' mt='2em'
