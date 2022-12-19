@@ -12,7 +12,6 @@ const mockedUseSelector = jest.spyOn(reduxHooks, 'useSelector');
 
 describe('Artist Card test', () => {
   it('Should render and match snapshot when data loaded', () => {
-
     mockedUseSelector.mockReturnValue(true);
     const card = render(
       <BrowserRouter>
@@ -26,7 +25,6 @@ describe('Artist Card test', () => {
   });
 
   it('Should navigate to artist page on click', () => {
-
     mockedUseSelector.mockReturnValue(true);
     const card = render(
       <BrowserRouter>
@@ -40,7 +38,6 @@ describe('Artist Card test', () => {
   });
 
   it('Should not render if data not loaded', () => {
-
     mockedUseSelector.mockReturnValue('');
     const card = render(
       <BrowserRouter>

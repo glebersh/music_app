@@ -14,19 +14,19 @@ const ArtistsList = () => {
     artistID={item.id}
     name={item?.name}
     imgURL={item?.images[1]?.url}
-    width={item?.images[1]?.width}
   />)
   )
 
   return (
     <>
       {errorStatus &&
-        <Alert status='error'>
+        <Alert status='error'
+          role='error-alert'>
           <AlertIcon />
           <AlertTitle>Something went wrong...</AlertTitle>
           <AlertDescription>Check the API response</AlertDescription>
         </Alert>}
-      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' />}
+      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' role='spinner' />}
       {loadingStatus === 'resolved' && artistsData}
     </>
   )
