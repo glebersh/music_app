@@ -15,21 +15,26 @@ const Tracklist = () => {
       playlist?.images[0]?.url : currentSong?.track?.album?.images[0]?.url : null;
 
 
-  const albumName = loadingStatus === 'resolved' ? songsCollectionType === 'songs' ? currentSong?.album?.name : playlist?.name : null;
+  const albumName = loadingStatus === 'resolved' &&
+    songsCollectionType === 'songs' ?
+    currentSong?.album?.name : playlist?.name;
 
 
   return (
     <>
       {errorStatus &&
-        <Alert status='error'>
+        <Alert status='error' role='error-alert'>
           <AlertIcon />
           <AlertTitle>Something went wrong...</AlertTitle>
           <AlertDescription>Check the API response</AlertDescription>
         </Alert>}
 
-      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' />}
+      {loadingStatus === 'loading' &&
+        <Spinner
+          w='150px' h='150px'
+          role='spinner' />}
 
-      {loadingStatus === 'resolved' ?
+      {loadingStatus === 'resolved' &&
         <Flex m='0 auto' w='80%' justify='space-between' align='center' id='tracklist' pb='20px'>
           <Box flex='1' maxW='500px'>
             {songsCollectionType === 'albums' ?
@@ -42,8 +47,7 @@ const Tracklist = () => {
             <Text fontWeight='700' color='white'
               fontSize='24px' textAlign='center'>{albumName}</Text>
           </Box>
-        </Flex>
-        : null}
+        </Flex>}
     </>
   )
 };
