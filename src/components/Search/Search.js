@@ -37,8 +37,10 @@ const Search = () => {
       <form onSubmit={(e) => sendSearchRequest(e, searchText, searchCategory)}>
         <Flex direction='row' flexWrap='wrap' justify='flex-start' align='center'>
           <Input type='search' onChange={(e) => setSearchText(e.target.value)}
-            display='inline-block' w='50%' />
+            display='inline-block' w='50%'
+            role='search' />
           <Input type='submit' value='Search'
+            role='search-submit-button'
             _hover={hoverStyle}
             w='10%' minW='100px'
             ml='2em'
@@ -49,22 +51,27 @@ const Search = () => {
           <Tag onClick={() => setSearchCategory('multi')}
             transition='.33s'
             _hover={hoverStyle}
-            _active={{ transform: 'scale(0.97,0.97)' }}>Multi</Tag>
+            _active={{ transform: 'scale(0.97,0.97)' }}
+            role='search-filter-button'>Multi</Tag>
           <Tag onClick={() => setSearchCategory('songs')}
             transition='.33s'
             _hover={hoverStyle}
-            _active={{ transform: 'scale(0.97,0.97)' }}>Songs</Tag>
+            _active={{ transform: 'scale(0.97,0.97)' }}
+            role='search-filter-button'>Songs</Tag>
           <Tag onClick={() => setSearchCategory('albums')}
             transition='.33s'
             _hover={hoverStyle}
-            _active={{ transform: 'scale(0.97,0.97)' }}>Albums</Tag>
+            _active={{ transform: 'scale(0.97,0.97)' }}
+            role='search-filter-button'>Albums</Tag>
           <Tag onClick={() => setSearchCategory('artists')}
             transition='.33s'
             _hover={hoverStyle}
-            _active={{ transform: 'scale(0.97,0.97)' }}>Artists</Tag>
+            _active={{ transform: 'scale(0.97,0.97)' }}
+            role='search-filter-button'>Artists</Tag>
           <Tag onClick={() => setSearchCategory('playlists')}
             _hover={hoverStyle}
-            _active={{ transform: 'scale(0.97,0.97)' }}>Playlists</Tag>
+            _active={{ transform: 'scale(0.97,0.97)' }}
+            role='search-filter-button'>Playlists</Tag>
         </Flex>
       </form>
     </Box >

@@ -32,14 +32,14 @@ const SongCollectionsList = ({ collectionType }) => {
   });
 
   return (
-    <>
+    <div data-testid='albums-list'>
       {errorStatus &&
-        <Alert status='error'>
+        <Alert status='error' role='error-alert'>
           <AlertIcon />
           <AlertTitle>Something went wrong...</AlertTitle>
           <AlertDescription>Check the API response</AlertDescription>
         </Alert>}
-      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' />}
+      {loadingStatus === 'loading' && <Spinner w='150px' h='150px' role='spinner' />}
       {loadingStatus === 'resolved' &&
         content.map((item) =>
         (<SongCollectionCard
@@ -47,7 +47,7 @@ const SongCollectionsList = ({ collectionType }) => {
           collectionType={collectionType}
           id={item.id} {...item}
         />))}
-    </>
+    </div>
   )
 };
 

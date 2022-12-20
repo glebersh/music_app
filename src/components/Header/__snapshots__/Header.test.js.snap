@@ -62,10 +62,12 @@ Object {
             >
               <input
                 class="chakra-input css-15u1lqs"
+                role="search"
                 type="search"
               />
               <input
                 class="chakra-input css-hn1347"
+                role="search-submit-button"
                 type="submit"
                 value="Search"
               />
@@ -75,26 +77,31 @@ Object {
             >
               <span
                 class="css-13tvnpb"
+                role="search-filter-button"
               >
                 Multi
               </span>
               <span
                 class="css-13tvnpb"
+                role="search-filter-button"
               >
                 Songs
               </span>
               <span
                 class="css-13tvnpb"
+                role="search-filter-button"
               >
                 Albums
               </span>
               <span
                 class="css-13tvnpb"
+                role="search-filter-button"
               >
                 Artists
               </span>
               <span
                 class="css-1qcgofx"
+                role="search-filter-button"
               >
                 Playlists
               </span>
@@ -210,10 +217,12 @@ Object {
           >
             <input
               class="chakra-input css-15u1lqs"
+              role="search"
               type="search"
             />
             <input
               class="chakra-input css-hn1347"
+              role="search-submit-button"
               type="submit"
               value="Search"
             />
@@ -223,26 +232,31 @@ Object {
           >
             <span
               class="css-13tvnpb"
+              role="search-filter-button"
             >
               Multi
             </span>
             <span
               class="css-13tvnpb"
+              role="search-filter-button"
             >
               Songs
             </span>
             <span
               class="css-13tvnpb"
+              role="search-filter-button"
             >
               Albums
             </span>
             <span
               class="css-13tvnpb"
+              role="search-filter-button"
             >
               Artists
             </span>
             <span
               class="css-1qcgofx"
+              role="search-filter-button"
             >
               Playlists
             </span>
