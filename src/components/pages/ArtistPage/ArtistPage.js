@@ -28,7 +28,9 @@ const ArtistPage = () => {
           <AlertTitle>Something went wrong...</AlertTitle>
           <AlertDescription>Check the API response</AlertDescription>
         </Alert>}
+
       {loadingStatus === 'loading' && <Spinner w='150px' h='150px' />}
+
       {loadingStatus === 'resolved' &&
         <>
           <Flex w='100%' justify='center' gap='5em' mt='5em'>
@@ -41,6 +43,7 @@ const ArtistPage = () => {
                 <Text mt='1em'>Genres:
                   {data?.genres.map(item => <Tag key={item} ml='.5em'>{item}</Tag>)}
                 </Text>}
+
               <Text mt='1em'>Followers: {data?.followers?.total}</Text>
               <Text border='1px solid lightgray' textAlign='center'
                 p='.2em' borderRadius='5px' transition='.33s' mt='1em' maxW='200px'
@@ -48,11 +51,14 @@ const ArtistPage = () => {
             </Box>
           </Flex>
           <Text fontSize='2.5em' w='100%' m='3em auto 1.5em' paddingInlineStart='5em'>TOP TRACKS</Text>
-          <Grid gridTemplateColumns='1fr 1fr' w='80%'>
+
+          <Grid gridTemplateColumns='1fr 1fr' w='80%' m='0 auto'>
             <SongsList type='ARTIST_TOP_TRACKS' />
           </Grid>
+
           <Text fontSize='2.5em' w='100%' m='3em auto 1.5em' paddingInlineStart='5em'>ARTIST ALBUMS</Text>
-          <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
+
+          <Flex direction='row' justify='space-evenly' w='85%' flexWrap='wrap' m='0 auto 7em'>
             <SongCollectionsList collectionType='ARTIST_ALBUMS' />
           </Flex>
         </>}

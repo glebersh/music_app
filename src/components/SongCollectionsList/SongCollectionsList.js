@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SongCollectionCard from '../SongCollectionCard/SongCollectionCard';
-import { Alert, AlertTitle, AlertDescription, AlertIcon, Spinner } from '@chakra-ui/react';
+import { Alert, AlertTitle, AlertDescription, AlertIcon, Spinner, Flex, Box } from '@chakra-ui/react';
 
 const SongCollectionsList = ({ collectionType }) => {
 
@@ -32,7 +32,7 @@ const SongCollectionsList = ({ collectionType }) => {
   });
 
   return (
-    <div data-testid='albums-list'>
+    <Box data-testid='albums-list'>
       {errorStatus &&
         <Alert status='error' role='error-alert'>
           <AlertIcon />
@@ -40,14 +40,18 @@ const SongCollectionsList = ({ collectionType }) => {
           <AlertDescription>Check the API response</AlertDescription>
         </Alert>}
       {loadingStatus === 'loading' && <Spinner w='150px' h='150px' role='spinner' />}
+
       {loadingStatus === 'resolved' &&
-        content.map((item) =>
-        (<SongCollectionCard
-          key={item.uri}
-          collectionType={collectionType}
-          id={item.id} {...item}
-        />))}
-    </div>
+        <Flex flexWrap='wrap' gap='1.5em'>
+          {content.map((item) =>
+          (<SongCollectionCard
+            key={item.uri}
+            collectionType={collectionType}
+            id={item.id} {...item}
+          />))}
+        </Flex>
+      }
+    </Box>
   )
 };
 

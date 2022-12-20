@@ -15,37 +15,37 @@ const SearchResultsPage = () => {
   const pageContent = () => {
     switch (currentSearchCategory) {
       case 'songs': {
-        return (<Grid gridTemplateColumns='1fr 1fr 1fr 1fr 1fr' gridTemplateRows='1fr 1fr 1fr' w='90%' m='0 auto 0 10em'><SongsList /></Grid>)
+        return (<Grid gridTemplateColumns='1fr 1fr 1fr' w='80%' m='5em auto 7em'><SongsList /></Grid>)
       }
       case 'albums': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='ALBUMS' /></Flex>)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='85%' m='5em auto 7em'><SongCollectionsList collectionType='ALBUMS' /></Flex>)
       }
       case 'playlists': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><SongCollectionsList collectionType='PLAYLISTS' /></Flex >)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='85%' m='5em auto 7em'><SongCollectionsList collectionType='PLAYLISTS' /></Flex >)
       }
       case 'artists': {
-        return (<Flex flexWrap='wrap' justify='space-evenly' w='90%' mt='3em'><ArtistsList /></Flex >)
+        return (<Flex flexWrap='wrap' justify='space-evenly' w='70%' m='3em auto 7em'><ArtistsList /></Flex >)
       }
       default: {
         return (
           <>
             <Text w='100%' fontSize='2.5em' m='3em 0 1.5em' paddingInlineStart='5em'>SONGS</Text>
-            <Grid gridTemplateColumns='1fr 1fr 1fr' w='80%'>
+            <Grid gridTemplateColumns='1fr 1fr 1fr' w='80%' m='0 auto'>
               <SongsList />
             </Grid>
 
             <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>ALBUMS</Text>
-            <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
+            <Flex direction='row' justify='space-evenly' w='85%' m='0 auto' flexWrap='wrap' align='center'>
               <SongCollectionsList collectionType='ALBUMS' />
             </Flex>
 
             <Text fontSize='2.5em' w='100%' m='3em 0 1em' paddingInlineStart='5em'>ARTISTS</Text>
-            <Flex direction='row' justify='space-evenly' w='70%' flexWrap='wrap'>
+            <Flex direction='row' justify='space-evenly' w='70%' m='0 auto' flexWrap='wrap'>
               <ArtistsList />
             </Flex>
 
             <Text fontSize='2.5em' w='100%' m='3em 0 1.5em' paddingInlineStart='5em'>PLAYLISTS</Text>
-            <Flex direction='row' justify='space-evenly' w='90%' flexWrap='wrap'>
+            <Flex direction='row' justify='space-evenly' w='85%' m='0 auto 7em' flexWrap='wrap' align='center'>
               <SongCollectionsList collectionType='PLAYLISTS' />
             </Flex>
           </>

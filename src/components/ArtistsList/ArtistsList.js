@@ -14,8 +14,7 @@ const ArtistsList = () => {
     artistID={item.id}
     name={item?.name}
     imgURL={item?.images[1]?.url}
-  />)
-  )
+  />));
 
   return (
     <>

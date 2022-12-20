@@ -12,3 +12,10 @@ img:hover+.song-collection-icon {
   opacity: 1;
   transition: '0.44s';
 }
+
+.song-collection-icon:hover {
+  opacity: 1;
+  transition: '0.44s';
+  cursor: pointer;
+  color: #db295f;
+}

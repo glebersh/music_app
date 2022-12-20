@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 
 const ArtistCard = ({ name, imgURL, artistID }) => {
   const link = `artists/${artistID}`;
-  const isLoading = useSelector(state => state.searchReducer.isLoading);
+  const loadingStatus = useSelector(state => state.searchReducer.loadingStatus);
   return (
     <div data-testid='artist-card'>
-      {isLoading ?
-        <Flex direction='column' gap='.5em' justify='flex-start' mt='3em'
+      {loadingStatus === 'resolved' ?
+        (<Flex direction='column' gap='.5em' justify='flex-start' mt='3em'
           align='flex-start'>
 
           <Image src={imgURL} w='240px' h='240px' loading="lazy"
@@ -20,12 +20,13 @@ const ArtistCard = ({ name, imgURL, artistID }) => {
           <Link to={link} role='link'>
             <Text fontSize='1em' transtion='color 0.33s'
               _hover={{ color: 'primary' }}
-              w='100%'>{name}
+              w='100%'>
+              {name}
             </Text>
           </Link >
           <Tag w='100px' fontSize='1em'
             paddingInlineStart='30px'>Artist</Tag>
-        </Flex > : null}
+        </Flex>) : null}
     </div>
   )
 };
