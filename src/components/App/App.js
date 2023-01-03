@@ -17,12 +17,12 @@ const RESPONSE_TYPE = "token";
 
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-// Replace with your app's client ID, redirect URI and desired scopes
+
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
 ];
-// Get the hash of the url
+
 const hash = window.location.hash
   .substring(1)
   .split("&")
@@ -42,7 +42,6 @@ const App = () => {
   useEffect(() => {
     let _token = hash.access_token;
     if (_token) {
-      // Set token
       dispatch(setAuthToken(_token));
     }
   }, []);
